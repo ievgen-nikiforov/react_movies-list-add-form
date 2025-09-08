@@ -32,9 +32,15 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
     // Handle image URL change
     setImgUrl(newValue);
   };
-  const submitForm = (e: React.FormEvent) => {
+  const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const newMovie = { title, description, imgUrl, imdbUrl, imdbId };
+    const newMovie = {
+      title: title.trim(),
+      description: description.trim(),
+      imgUrl: imgUrl.trim(),
+      imdbUrl: imdbUrl.trim(),
+      imdbId: imdbId.trim(),
+    } as Movie;
     onAdd(newMovie);
     setCount(count + 1);
     setDescription('');
@@ -98,7 +104,7 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
               !imdbUrl.trim() ||
               !imdbId.trim()
             }
-            onClick={submitForm}
+            onSubmit={submitForm}
           >
             Add
           </button>
